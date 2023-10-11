@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikito                                     +#+  +:+       +#+        */
+/*   By: jedurand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 07:57:36 by nikito            #+#    #+#             */
-/*   Updated: 2022/03/16 07:59:16 by mjallada         ###   ########.fr       */
+/*   Created: 2023/10/11 14:35:30 by jedurand          #+#    #+#             */
+/*   Updated: 2023/10/11 14:35:35 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/get_next_line.h"
+#include "get_next_line.h"
 #include <fcntl.h>
 
 int	main(void)
