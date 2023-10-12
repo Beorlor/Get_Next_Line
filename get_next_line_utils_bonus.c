@@ -3,104 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jedurand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 14:37:30 by jedurand          #+#    #+#             */
-/*   Updated: 2023/10/11 14:43:53 by jedurand         ###   ########.fr       */
+/*   Created: 2021/10/19 11:14:11 by jdecorte          #+#    #+#             */
+/*   Updated: 2023/10/12 02:21:21 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-/* Looks for a newline character in the given linked list. */
-
-int	found_newline(int fd, t_list *stash)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
+	int		sizetotal;
+	char	*res;
 	int		i;
+	int		j;
 
-	if (stash == NULL)
-		return (0);
-	while (stash && stash->fd != fd)
-		stash = stash->next;
 	i = 0;
-	while (stash && stash->content[i])
+	sizetotal = ft_strlen(s1) + ft_strlen(s2);
+	res = malloc(sizeof(char) * (sizetotal + 1));
+	if (!res || !s1 || !s2)
+		return (NULL);
+	while (s1[i] != 0)
 	{
-		if (stash->content[i] == '\n')
-			return (1);
+		res[i] = s1[i];
 		i++;
 	}
-	return (0);
+	j = 0;
+	while (s2[j] != 0)
+	{
+		res[i] = s2[j];
+		i++;
+		j++;
+	}
+	res[sizetotal] = 0;
+	return (res);
 }
 
-/* Returns a pointer to the last node in our stash */
-
-t_list	*ft_lst_get_last(t_list *stash)
+char	*ft_strchr(const char *string, int to_find )
 {
-	t_list	*current;
+	char	*str;
 
-	current = stash;
-	if (current == NULL)
-		return (current);
-	while (current->next)
-		current = current->next;
-	return (current);
+	str = (char *)string;
+	while (*str != to_find && *str != 0)
+		str++;
+	if (*str == to_find)
+		return (str);
+	else
+		return (NULL);
 }
 
-/* Calculates the number of chars in the current line, including the trailing
- * \n if there is one, and allocates memory accordingly. */
+void	ft_bzero(void *s, size_t n)
+{
+	char	*str;
+	size_t	i;
 
-void	generate_line(int fd, char **line, t_list *stash)
+	str = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t elementCount, size_t elementSize)
+{
+	char	*res;
+
+	res = malloc(elementSize * elementCount);
+	if (!res)
+		return (NULL);
+	ft_bzero(res, elementSize * elementCount);
+	return (res);
+}
+
+size_t	ft_strlen(const char *theString)
 {
 	int	i;
-	int	len;
 
-	len = 0;
-	while (stash)
-	{
-		i = 0;
-		if (stash->fd == fd)
-		{
-			while (stash->content[i] && stash->content[i] != '\n')
-			{
-				len++;
-				i++;
-			}
-			if (stash->content[i] == '\n')
-				len++;
-		}
-		stash = stash->next;
-	}
-	*line = malloc(sizeof(char) * (len + 1));
-}
-
-/* Frees the entire stash. */
-
-void	free_stash(int fd, t_list *stash)
-{
-	t_list	*current;
-	t_list	*next;
-
-	current = stash;
-	while (current)
-	{
-		if (current->fd == fd)
-		{
-			free(current->content);
-			next = current->next;
-			free(current);
-			current = next;
-		}
-		else
-			current = current->next;
-	}
-}
-
-int	ft_strlen(const char *str)
-{
-	int	len;
-
-	len = 0;
-	while (*(str++))
-		len++;
-	return (len);
+	i = 0;
+	while (theString[i])
+		i++;
+	return (i);
 }
