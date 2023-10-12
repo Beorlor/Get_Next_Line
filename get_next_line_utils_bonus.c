@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jedurand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 11:14:11 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/10/12 02:21:21 by jedurand         ###   ########.fr       */
+/*   Created: 2023/10/12 15:36:12 by jedurand          #+#    #+#             */
+/*   Updated: 2023/10/12 15:55:07 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+//free the previous line (s1)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	int		sizetotal;
 	char	*res;
@@ -37,6 +38,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	res[sizetotal] = 0;
+	free(s1);
 	return (res);
 }
 

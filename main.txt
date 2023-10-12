@@ -6,25 +6,33 @@
 /*   By: jedurand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:35:30 by jedurand          #+#    #+#             */
-/*   Updated: 2023/10/11 14:35:35 by jedurand         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:07:17 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include <fcntl.h>
+#include <stdio.h>
+#include "get_next_line_bonus.h"
 
 int	main(void)
 {
 	int		fd;
+	int		fd2;
 	char	*line;
 
-	fd = open("tests/two_lines_with_nl", O_RDONLY);
+	fd = open("tests/test", O_RDONLY);
+	fd2 = open("tests/test_reverse", O_RDONLY);
 	while (1)
 	{
 		line = get_next_line(fd);
-		printf("%s", line);
 		if (line == NULL)
 			break ;
+		printf("%s", line);
+		free(line);
+		line = get_next_line(fd2);
+		if (line == NULL)
+			break ;
+		printf("%s", line);
 		free(line);
 	}
 	return (0);

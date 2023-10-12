@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jedurand <jedurand@student.42perpignan.    +#+  +:+       +#+        */
+/*   By: jedurand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/10/12 02:21:20 by jedurand         ###   ########.fr       */
+/*   Created: 2023/10/12 15:36:01 by jedurand          #+#    #+#             */
+/*   Updated: 2023/10/12 15:53:50 by jedurand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-char	*ft_add(char *res, char *buff)
-{
-	char	*temp;
-
-	temp = ft_strjoin(res, buff);
-	free(res);
-	return (temp);
-}
 
 char	*ft_save(char *buff)
 {
@@ -84,7 +75,7 @@ char	*read_file(int fd, char *res)
 			return (NULL);
 		}
 		buff[readed] = 0;
-		res = ft_add(res, buff);
+		res = ft_strjoin(res, buff);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
@@ -94,7 +85,7 @@ char	*read_file(int fd, char *res)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[OPEN_MAX];
+	static char	*buffer[4096];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
