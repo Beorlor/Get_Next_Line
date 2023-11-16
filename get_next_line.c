@@ -134,11 +134,11 @@ void	read_and_stash(int fd, t_list **stash)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*stash = NULL;
+	static t_list	*stash;
 	char			*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
+		return (free(stash), stash = NULL, NULL);
 	line = NULL;
 	read_and_stash(fd, &stash);
 	if (stash == NULL)
